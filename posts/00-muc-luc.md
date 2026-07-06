@@ -12,53 +12,53 @@ Không chương nào mở đầu bằng định nghĩa. Mọi khái niệm đi t
 
 | Chương | Nội dung chính |
 |---|---|
-| [01 — Tại sao DDD ra đời](/#/post/01-tai-sao-ddd-ra-doi.md) | Business complexity là kẻ thù chính; vì sao thiết kế database-first, transaction script và CRUD thinking sụp đổ khi rule chồng chéo; accidental vs essential complexity; knowledge gap giữa dev và domain expert |
-| [02 — Domain và Subdomain](02-domain-va-subdomain.md) | Core / Supporting / Generic Domain; nhận diện lợi thế cạnh tranh; quyết định build–buy–outsource; "liều lượng DDD" theo từng vùng; hai case study phân rã domain (logistics, fintech) |
-| [03 — Ubiquitous Language](03-ubiquitous-language.md) | Chi phí dịch thuật vô hình; ngôn ngữ chung đi vào code thế nào; Event Storming; một từ nhiều nghĩa dẫn tới Bounded Context; quy ước song ngữ Việt–Anh cho team Việt |
+| [01 — Tại sao DDD ra đời](/#/post/01-tai-sao-ddd-ra-doi) | Business complexity là kẻ thù chính; vì sao thiết kế database-first, transaction script và CRUD thinking sụp đổ khi rule chồng chéo; accidental vs essential complexity; knowledge gap giữa dev và domain expert |
+| [02 — Domain và Subdomain](#/post/02-domain-va-subdomain) | Core / Supporting / Generic Domain; nhận diện lợi thế cạnh tranh; quyết định build–buy–outsource; "liều lượng DDD" theo từng vùng; hai case study phân rã domain (logistics, fintech) |
+| [03 — Ubiquitous Language](#/post/03-ubiquitous-language) | Chi phí dịch thuật vô hình; ngôn ngữ chung đi vào code thế nào; Event Storming; một từ nhiều nghĩa dẫn tới Bounded Context; quy ước song ngữ Việt–Anh cho team Việt |
 
 ### Phần II — Strategic Design (Level 3)
 
 | Chương | Nội dung chính |
 |---|---|
-| [04 — Bounded Context](04-bounded-context.md) | Vì sao Enterprise Model thống nhất luôn thất bại; ranh giới ngữ nghĩa; Bounded Context vs Subdomain (problem space vs solution space); Bounded Context ≠ microservice; Shared Database phá ranh giới thế nào |
-| [05 — Context Mapping](05-context-mapping.md) | Context Map là công cụ quyền lực/tổ chức; đủ 9 pattern: Partnership, Shared Kernel, Customer/Supplier, Conformist, ACL, Open Host Service, Published Language, Separate Ways, Big Ball of Mud; code ACL đầy đủ TS + Go |
+| [04 — Bounded Context](#/post/04-bounded-context) | Vì sao Enterprise Model thống nhất luôn thất bại; ranh giới ngữ nghĩa; Bounded Context vs Subdomain (problem space vs solution space); Bounded Context ≠ microservice; Shared Database phá ranh giới thế nào |
+| [05 — Context Mapping](#/post/05-context-mapping) | Context Map là công cụ quyền lực/tổ chức; đủ 9 pattern: Partnership, Shared Kernel, Customer/Supplier, Conformist, ACL, Open Host Service, Published Language, Separate Ways, Big Ball of Mud; code ACL đầy đủ TS + Go |
 
 ### Phần III — Tactical Design (Level 2)
 
 | Chương | Nội dung chính |
 |---|---|
-| [06 — Entity và Value Object](06-entity-va-value-object.md) | Identity vs equality by value; immutability; primitive obsession; **Entity DDD ≠ entity ORM (TypeORM/GORM)**; refactor từ anemic sang rich model; chiến lược persistence mapping |
-| [07 — Aggregate](07-aggregate.md) | Chương trọng tâm: consistency boundary = transaction boundary; xác định ranh giới từ invariant thật (không từ ERD); optimistic concurrency; giải phẫu God Aggregate từng bước; **aggregate ≠ nhóm bảng, ≠ relations của ORM** |
-| [08 — Repository và Factory](08-repository-va-factory.md) | Repository là collection ảo của aggregate; interface ở domain, implementation ở infrastructure; **Repository DDD ≠ repository của ORM**; vì sao generic repository nguy hiểm; Factory và reconstitution; in-memory fake cho test |
-| [09 — Domain Service và Application Service](09-domain-service-va-application-service.md) | Logic không thuộc entity nào thì ở đâu; orchestration vs business rule; giải phẫu một OrderService 500 dòng kiểu NestJS/Go và tách từng bước |
-| [10 — Domain Event](10-domain-event.md) | Sự kiện là quá khứ bất biến; **Domain Event vs Integration Event**; collect trong aggregate — publish sau persist; thiết kế payload; event versioning; eventual consistency có kỷ luật |
-| [11 — Specification](11-specification.md) | Business rule dạng điều kiện có nhà; kết hợp and/or/not; ba công dụng và bài toán "dịch sang SQL"; khi nào specification là overkill |
+| [06 — Entity và Value Object](#/post/06-entity-va-value-object) | Identity vs equality by value; immutability; primitive obsession; **Entity DDD ≠ entity ORM (TypeORM/GORM)**; refactor từ anemic sang rich model; chiến lược persistence mapping |
+| [07 — Aggregate](#/post/07-aggregate) | Chương trọng tâm: consistency boundary = transaction boundary; xác định ranh giới từ invariant thật (không từ ERD); optimistic concurrency; giải phẫu God Aggregate từng bước; **aggregate ≠ nhóm bảng, ≠ relations của ORM** |
+| [08 — Repository và Factory](#/post/08-repository-va-factory) | Repository là collection ảo của aggregate; interface ở domain, implementation ở infrastructure; **Repository DDD ≠ repository của ORM**; vì sao generic repository nguy hiểm; Factory và reconstitution; in-memory fake cho test |
+| [09 — Domain Service và Application Service](#/post/09-domain-service-va-application-service) | Logic không thuộc entity nào thì ở đâu; orchestration vs business rule; giải phẫu một OrderService 500 dòng kiểu NestJS/Go và tách từng bước |
+| [10 — Domain Event](#/post/10-domain-event) | Sự kiện là quá khứ bất biến; **Domain Event vs Integration Event**; collect trong aggregate — publish sau persist; thiết kế payload; event versioning; eventual consistency có kỷ luật |
+| [11 — Specification](#/post/11-specification) | Business rule dạng điều kiện có nhà; kết hợp and/or/not; ba công dụng và bài toán "dịch sang SQL"; khi nào specification là overkill |
 
 ### Phần IV — DDD và Kiến trúc (Level 3–4)
 
 | Chương | Nội dung chính |
 |---|---|
-| [12 — DDD và Kiến trúc](12-ddd-va-kien-truc.md) | Layered vs Hexagonal vs Onion vs Clean — bản chất chung là dependency inversion; cấu trúc thư mục cụ thể cho NestJS và Go; Modular Monolith là điểm khởi đầu đúng; Bounded Context là đơn vị chia microservice; distributed monolith |
-| [13 — DDD và Distributed Systems](13-ddd-va-distributed-systems.md) | Event-driven Architecture; CQRS (hai mức, không bắt buộc kèm Event Sourcing); Saga — choreography vs orchestration, compensation; Outbox và bài toán dual-write; Event Sourcing — chi phí thật; Idempotency; vì sao 2PC chết |
+| [12 — DDD và Kiến trúc](#/post/12-ddd-va-kien-truc) | Layered vs Hexagonal vs Onion vs Clean — bản chất chung là dependency inversion; cấu trúc thư mục cụ thể cho NestJS và Go; Modular Monolith là điểm khởi đầu đúng; Bounded Context là đơn vị chia microservice; distributed monolith |
+| [13 — DDD và Distributed Systems](#/post/13-ddd-va-distributed-systems) | Event-driven Architecture; CQRS (hai mức, không bắt buộc kèm Event Sourcing); Saga — choreography vs orchestration, compensation; Outbox và bài toán dual-write; Event Sourcing — chi phí thật; Idempotency; vì sao 2PC chết |
 
 ### Phần V — Production (Level 4)
 
 | Chương | Nội dung chính |
 |---|---|
-| [14 — DDD trong Production](14-ddd-trong-production.md) | Refactor legacy: strangler fig, bubble context, ACL bọc legacy; incremental adoption; Team Organization và Conway's Law, team topologies, inverse Conway; Monolith First; lộ trình tách microservices; testing, versioning, migration dài hạn |
+| [14 — DDD trong Production](#/post/14-ddd-trong-production) | Refactor legacy: strangler fig, bubble context, ACL bọc legacy; incremental adoption; Team Organization và Conway's Law, team topologies, inverse Conway; Monolith First; lộ trình tách microservices; testing, versioning, migration dài hạn |
 
 ### Phần VI — Case Study 8 ngành
 
 | Chương | Nội dung chính |
 |---|---|
-| [15a — E-commerce, FinTech, Banking, Logistics](15a-case-study-ecommerce-fintech-banking-logistics.md) | Mỗi ngành: phân rã domain và lý do, context map, aggregate chủ chốt với invariant cụ thể (Order, Ledger double-entry, Shipment...), luồng event chính, trade-off và các lỗi thiết kế đặc thù |
-| [15b — SaaS, Blockchain, Booking, Social Network](15b-case-study-saas-blockchain-booking-social.md) | Tenant isolation ba tầng chốt; ledger off-chain và ranh giới với on-chain; chống double-booking bằng reservation pattern; fan-out và ModerationCase; bảng so sánh bốn thái cực nhất quán |
+| [15a — E-commerce, FinTech, Banking, Logistics](#/post/15a-case-study-ecommerce-fintech-banking-logistics) | Mỗi ngành: phân rã domain và lý do, context map, aggregate chủ chốt với invariant cụ thể (Order, Ledger double-entry, Shipment...), luồng event chính, trade-off và các lỗi thiết kế đặc thù |
+| [15b — SaaS, Blockchain, Booking, Social Network](#/post/15b-case-study-saas-blockchain-booking-social) | Tenant isolation ba tầng chốt; ledger off-chain và ranh giới với on-chain; chống double-booking bằng reservation pattern; fan-out và ModerationCase; bảng so sánh bốn thái cực nhất quán |
 
 ### Phần VII — Tổng kết
 
 | Chương | Nội dung chính |
 |---|---|
-| [16 — Anti-patterns & Khi nào KHÔNG nên dùng DDD](16-anti-patterns-va-khi-nao-khong-dung-ddd.md) | 11 anti-pattern với cách nhận biết trong code thật và cách sửa; bảng "khi nào không dùng DDD" với phương pháp thay thế; ma trận quyết định liều lượng; checklist 10 câu; tổng kết toàn bộ và lộ trình đọc tiếp |
+| [16 — Anti-patterns & Khi nào KHÔNG nên dùng DDD](#/post/16-anti-patterns-va-khi-nao-khong-dung-ddd) | 11 anti-pattern với cách nhận biết trong code thật và cách sửa; bảng "khi nào không dùng DDD" với phương pháp thay thế; ma trận quyết định liều lượng; checklist 10 câu; tổng kết toàn bộ và lộ trình đọc tiếp |
 
 ## Ba lộ trình đọc gợi ý
 
