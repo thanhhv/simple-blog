@@ -296,6 +296,7 @@
   var POSTS_URL = 'posts/posts.json';
   var app = document.getElementById('app');
   var postsCache = null;
+  var mdCache = {}; // slug -> Promise<string> nội dung markdown
 
   /* ---------- Theme (🌙 = chuyển sang tối, 💡 = chuyển sang sáng) ---------- */
   function applyTheme(theme) {
@@ -386,35 +387,46 @@
         html += '</div>';
       }
       app.innerHTML = html;
-      document.title = 'Blog của Gavin';
+      document.title = 'Tôi Đọc, AI Viết';
       window.scrollTo(0, 0);
     }).catch(showError);
   }
 
   /* ---------- Bài viết chi tiết ---------- */
+  // Cache + dedupe: fetch mỗi file .md đúng 1 lần
+  function fetchMd(post) {
+    if (!mdCache[post.slug]) {
+      mdCache[post.slug] = fetch('posts/' + post.file).then(function (r) {
+        if (!r.ok) {
+          delete mdCache[post.slug]; // lỗi thì bỏ cache để thử lại lần sau
+          throw new Error('Không tải được bài viết');
+        }
+        return r.text();
+      });
+    }
+    return mdCache[post.slug];
+  }
+
   function renderPost(slug) {
-    layout.classList.add('post-view');
     loadPosts().then(function (posts) {
       var post = posts.filter(function (p) { return p.slug === slug; })[0];
       if (!post) {
+        layout.classList.add('post-view');
         app.innerHTML = '<p class="status-msg">Không tìm thấy bài viết. <a href="#/">Về trang chủ</a></p>';
         return;
       }
-      return fetch('posts/' + post.file)
-        .then(function (r) {
-          if (!r.ok) throw new Error('Không tải được bài viết');
-          return r.text();
-        })
+      return fetchMd(post)
         .then(function (md) {
           // Bỏ frontmatter nếu có
           md = md.replace(/^---[\s\S]*?---\s*/, '');
           // Bỏ H1 đầu tiên nếu trùng tiêu đề (tránh lặp)
           md = md.replace(/^#\s+.*\n/, '');
           var body = marked.parse(md);
+          // Đổi layout và nội dung trong cùng 1 frame — không còn flash
+          layout.classList.add('post-view');
           app.innerHTML =
             '<div class="post-header">' +
-            '<a class="home-link" href="#/">Gavin</a>' +
-            '<nav><a href="#/">Bài viết</a>' +
+            '<a class="home-link" href="#/">Opus Learning</a>' +
             '<button class="theme-toggle" aria-label="Chuyển giao diện sáng/tối">' +
             (currentTheme() === 'dark' ? '💡' : '🌙') + '</button></nav>' +
             '</div>' +
@@ -435,6 +447,19 @@
     app.innerHTML = '<p class="status-msg">Lỗi: ' + esc(err.message) +
       '.<br>Lưu ý: trang cần chạy qua HTTP (GitHub Pages hoặc <code>python3 -m http.server</code>), không mở trực tiếp file.</p>';
   }
+
+  /* ---------- Prefetch: tải trước .md khi hover/chạm vào link bài viết ---------- */
+  function prefetchFromLink(target) {
+    var a = target.closest ? target.closest('a[href^="#/post/"]') : null;
+    if (!a) return;
+    var slug = decodeURIComponent(a.getAttribute('href').slice('#/post/'.length));
+    loadPosts().then(function (posts) {
+      var post = posts.filter(function (p) { return p.slug === slug; })[0];
+      if (post) fetchMd(post).catch(function () {}); // lỗi prefetch thì bỏ qua
+    });
+  }
+  document.addEventListener('mouseover', function (e) { prefetchFromLink(e.target); });
+  document.addEventListener('touchstart', function (e) { prefetchFromLink(e.target); }, { passive: true });
 
   /* ---------- Router ---------- */
   function route() {
