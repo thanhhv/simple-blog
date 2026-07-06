@@ -58,4 +58,3 @@ Các lựa chọn khác: Netlify, Vercel, Cloudflare Pages — chỉ cần kéo 
 
 - Đổi tên/tiêu đề: sửa `Gavin` và `<title>` trong `index.html`
 - Đổi font, màu, độ rộng: sửa biến CSS trong `:root` ở đầu `index.html`
-# simple-blog

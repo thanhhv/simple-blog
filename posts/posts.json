@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "gioi-thieu-blog",
+    "file": "gioi-thieu-blog.md",
+    "title": "Chào mừng đến blog của tôi",
+    "date": "2026-07-06",
+    "tags": ["chung"],
+    "description": "Bài viết đầu tiên — giới thiệu về blog và cách nó hoạt động."
+  },
+  {
+    "slug": "toi-uu-truy-van-sql",
+    "file": "toi-uu-truy-van-sql.md",
+    "title": "Tối ưu truy vấn SQL: những điều cơ bản",
+    "date": "2026-07-01",
+    "tags": ["database", "sql"],
+    "description": "Index, EXPLAIN, và các lỗi thường gặp khi viết truy vấn."
+  }
+]
