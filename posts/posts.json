@@ -1,18 +1,146 @@
 [
   {
-    "slug": "gioi-thieu-blog",
-    "file": "gioi-thieu-blog.md",
-    "title": "Chào mừng đến blog của tôi",
-    "date": "2026-07-06",
-    "tags": ["chung"],
-    "description": "Bài viết đầu tiên — giới thiệu về blog và cách nó hoạt động."
+    "slug": "00-muc-luc",
+    "file": "00-muc-luc.md",
+    "title": "Domain-Driven Design — Bộ tài liệu chuyên sâu",
+    "date": "2026-07-07",
+    "tags": ["ddd", "muc-luc"],
+    "description": "Mục lục và bản đồ đọc cho bộ tài liệu DDD tiếng Việt — 17 chương từ foundations đến production."
   },
   {
-    "slug": "toi-uu-truy-van-sql",
-    "file": "toi-uu-truy-van-sql.md",
-    "title": "Tối ưu truy vấn SQL: những điều cơ bản",
-    "date": "2026-07-01",
-    "tags": ["database", "sql"],
-    "description": "Index, EXPLAIN, và các lỗi thường gặp khi viết truy vấn."
+    "slug": "01-tai-sao-ddd-ra-doi",
+    "file": "01-tai-sao-ddd-ra-doi.md",
+    "title": "Chương 01 — Tại sao DDD ra đời: Business Complexity là kẻ thù thật sự",
+    "date": "2026-07-07",
+    "tags": ["ddd", "foundations"],
+    "description": "Vì sao database-first, CRUD và transaction script sụp đổ khi business rule chồng chéo."
+  },
+  {
+    "slug": "02-domain-va-subdomain",
+    "file": "02-domain-va-subdomain.md",
+    "title": "Chương 02 — Domain và Subdomain: Bản đồ chiến lược trước khi viết dòng code đầu tiên",
+    "date": "2026-07-07",
+    "tags": ["ddd", "foundations"],
+    "description": "Core, Supporting và Generic Domain — bản đồ chiến lược để quyết định build, buy hay outsource."
+  },
+  {
+    "slug": "03-ubiquitous-language",
+    "file": "03-ubiquitous-language.md",
+    "title": "Chương 03 — Ubiquitous Language: Ngôn ngữ chung là nền móng, không phải phụ kiện",
+    "date": "2026-07-07",
+    "tags": ["ddd", "foundations"],
+    "description": "Ngôn ngữ chung giữa dev và domain expert, và vì sao một từ nhiều nghĩa dẫn tới Bounded Context."
+  },
+  {
+    "slug": "04-bounded-context",
+    "file": "04-bounded-context.md",
+    "title": "Chương 04 — Bounded Context: Ranh Giới Ngữ Nghĩa Của Model",
+    "date": "2026-07-07",
+    "tags": ["ddd", "strategic-design"],
+    "description": "Bounded Context là ranh giới ngữ nghĩa của model — vì sao Enterprise Model thống nhất luôn thất bại."
+  },
+  {
+    "slug": "05-context-mapping",
+    "file": "05-context-mapping.md",
+    "title": "Chương 05 — Context Mapping: Bản Đồ Quyền Lực Giữa Các Bounded Context",
+    "date": "2026-07-07",
+    "tags": ["ddd", "strategic-design"],
+    "description": "Context Mapping với 9 pattern: Partnership, ACL, Open Host Service, Conformist và hơn thế nữa."
+  },
+  {
+    "slug": "06-entity-va-value-object",
+    "file": "06-entity-va-value-object.md",
+    "title": "Chương 6: Entity và Value Object — Hai viên gạch đầu tiên của Tactical Design",
+    "date": "2026-07-07",
+    "tags": ["ddd", "tactical-design"],
+    "description": "Identity vs equality by value, và vì sao Entity DDD không phải là entity ORM."
+  },
+  {
+    "slug": "07-aggregate",
+    "file": "07-aggregate.md",
+    "title": "Chương 07 — Aggregate và Aggregate Root: Consistency Boundary trong thế giới concurrent",
+    "date": "2026-07-07",
+    "tags": ["ddd", "tactical-design"],
+    "description": "Consistency boundary thật sự đến từ invariant, không phải nhóm bảng theo ERD."
+  },
+  {
+    "slug": "08-repository-va-factory",
+    "file": "08-repository-va-factory.md",
+    "title": "Chương 08 — Repository và Factory: Cửa khẩu giữa Domain và hạ tầng lưu trữ",
+    "date": "2026-07-07",
+    "tags": ["ddd", "tactical-design"],
+    "description": "Repository là collection ảo của aggregate, và vì sao generic repository nguy hiểm."
+  },
+  {
+    "slug": "09-domain-service-va-application-service",
+    "file": "09-domain-service-va-application-service.md",
+    "title": "Chương 9: Domain Service và Application Service — Tách \"nồi lẩu\" Service ra đúng tầng",
+    "date": "2026-07-07",
+    "tags": ["ddd", "tactical-design"],
+    "description": "Tách orchestration khỏi business rule trong một OrderService 500 dòng kiểu NestJS/Go."
+  },
+  {
+    "slug": "10-domain-event",
+    "file": "10-domain-event.md",
+    "title": "Chương 10: Domain Event — Ghi lại những gì ĐÃ xảy ra, để phần còn lại của hệ thống tự lo",
+    "date": "2026-07-07",
+    "tags": ["ddd", "tactical-design"],
+    "description": "Domain Event vs Integration Event, thu thập trong aggregate và publish sau khi persist."
+  },
+  {
+    "slug": "11-specification",
+    "file": "11-specification.md",
+    "title": "Chương 11 — Specification: Business rule dạng điều kiện cũng xứng đáng có nhà",
+    "date": "2026-07-07",
+    "tags": ["ddd", "tactical-design"],
+    "description": "Đóng gói business rule dạng điều kiện, kết hợp and/or/not, và khi nào là overkill."
+  },
+  {
+    "slug": "12-ddd-va-kien-truc",
+    "file": "12-ddd-va-kien-truc.md",
+    "title": "Chương 12: DDD và Kiến trúc hệ thống",
+    "date": "2026-07-07",
+    "tags": ["ddd", "architecture"],
+    "description": "Layered, Hexagonal, Onion, Clean — cùng chung bản chất dependency inversion."
+  },
+  {
+    "slug": "13-ddd-va-distributed-systems",
+    "file": "13-ddd-va-distributed-systems.md",
+    "title": "Chương 13: DDD và Distributed Systems",
+    "date": "2026-07-07",
+    "tags": ["ddd", "architecture"],
+    "description": "Event-driven Architecture, CQRS, Saga, Outbox, Event Sourcing và vì sao 2PC chết."
+  },
+  {
+    "slug": "14-ddd-trong-production",
+    "file": "14-ddd-trong-production.md",
+    "title": "Chương 14: DDD trong Production — Refactoring, Adoption, Tổ chức Team và Vận hành Dài hạn",
+    "date": "2026-07-07",
+    "tags": ["ddd", "production"],
+    "description": "Refactor legacy bằng strangler fig, tổ chức team theo Conway's Law, lộ trình tách microservice."
+  },
+  {
+    "slug": "15a-case-study-ecommerce-fintech-banking-logistics",
+    "file": "15a-case-study-ecommerce-fintech-banking-logistics.md",
+    "title": "Chương 15a — Case Study: E-commerce, FinTech, Banking, Logistics",
+    "date": "2026-07-07",
+    "tags": ["ddd", "case-study"],
+    "description": "Phân rã domain, context map và aggregate chủ chốt cho 4 ngành: E-commerce, FinTech, Banking, Logistics."
+  },
+  {
+    "slug": "15b-case-study-saas-blockchain-booking-social",
+    "file": "15b-case-study-saas-blockchain-booking-social.md",
+    "title": "Chương 15b — Case Study: SaaS, Blockchain, Booking System, Social Network",
+    "date": "2026-07-07",
+    "tags": ["ddd", "case-study"],
+    "description": "Tenant isolation, ledger off-chain, chống double-booking và fan-out cho 4 ngành còn lại."
+  },
+  {
+    "slug": "16-anti-patterns-va-khi-nao-khong-dung-ddd",
+    "file": "16-anti-patterns-va-khi-nao-khong-dung-ddd.md",
+    "title": "Chương 16: Anti-patterns & Khi nào KHÔNG nên dùng DDD",
+    "date": "2026-07-07",
+    "tags": ["ddd", "anti-pattern"],
+    "description": "11 anti-pattern thường gặp khi làm DDD sai, và bảng quyết định khi nào KHÔNG nên dùng DDD."
   }
 ]
