@@ -913,7 +913,7 @@ export class Order {
 - **Mất gì:** domain model bị ORM ràng buộc — VO phải có transformer/embedded để map cột, quan hệ lazy-loading có thể kích hoạt query ngầm trong method nghiệp vụ (nguy hiểm), migration schema kéo domain model thay đổi theo, và cám dỗ "thêm cái setter cho tiện" luôn thường trực vì decorator nhắc bạn rằng đây "chỉ là bảng".
 - **Khi nào chọn:** supporting subdomain, model đơn giản, team nhỏ, cần tốc độ; hoặc Go + GORM nơi struct tag ít xâm lấn hơn decorator.
 
-**Lời khuyên thực dụng:** đừng chọn một phương án cho toàn hệ thống. Chọn **theo từng Bounded Context**: context lõi (thanh toán, đặt hàng) tách hẳn; context phụ (quản lý banner, config) trộn cho nhanh. Sự nhất quán đáng giá, nhưng không đáng giá bằng việc đặt effort đúng chỗ — đây chính là tinh thần của [chương 02 — Domain & Subdomain](02-domain-va-subdomain.md).
+**Lời khuyên thực dụng:** đừng chọn một phương án cho toàn hệ thống. Chọn **theo từng Bounded Context**: context lõi (thanh toán, đặt hàng) tách hẳn; context phụ (quản lý banner, config) trộn cho nhanh. Sự nhất quán đáng giá, nhưng không đáng giá bằng việc đặt effort đúng chỗ — đây chính là tinh thần của [chương 02 — Domain & Subdomain](#/post/02-domain-va-subdomain).
 
 ---
 
@@ -1008,8 +1008,8 @@ Quy tắc ngón tay cái: **đếm số câu "nếu... thì không được..." 
 
 ## Đọc tiếp
 
-- **[Chương 07 — Aggregate & Aggregate Root](07-aggregate.md)**: chương quan trọng nhất của Tactical Design — consistency boundary, transaction boundary, và bài toán oversell kinh điển.
-- [Chương 08 — Repository & Factory](08-repository-va-factory.md): lưu và tái tạo aggregate mà không để ORM dắt mũi domain.
-- [Chương 09 — Domain Service & Application Service](09-domain-service-va-application-service.md): logic không thuộc về Entity/VO nào thì sống ở đâu.
-- Quay lại: [Chương 05 — Context Mapping](05-context-mapping.md) · [Mục lục](00-muc-luc.md)
+- **[Chương 07 — Aggregate & Aggregate Root](#/post/07-aggregate)**: chương quan trọng nhất của Tactical Design — consistency boundary, transaction boundary, và bài toán oversell kinh điển.
+- [Chương 08 — Repository & Factory](#/post/08-repository-va-factory): lưu và tái tạo aggregate mà không để ORM dắt mũi domain.
+- [Chương 09 — Domain Service & Application Service](#/post/09-domain-service-va-application-service): logic không thuộc về Entity/VO nào thì sống ở đâu.
+- Quay lại: [Chương 05 — Context Mapping](#/post/05-context-mapping) · [Mục lục](#/post/00-muc-luc)
 

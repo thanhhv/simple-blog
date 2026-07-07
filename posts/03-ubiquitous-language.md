@@ -1,6 +1,6 @@
 # Chương 03 — Ubiquitous Language: Ngôn ngữ chung là nền móng, không phải phụ kiện
 
-> Vị trí trong bộ tài liệu: chương cuối của phần Foundations. Chương [01](01-tai-sao-ddd-ra-doi.md) chỉ ra business complexity là kẻ thù chính; chương [02](02-domain-va-subdomain.md) dạy cách chia domain để phân bổ nguồn lực. Chương này trả lời câu hỏi nền tảng hơn cả hai: **làm sao để những gì team hiểu về nghiệp vụ không bị bóp méo trên đường đi từ cuộc họp vào code**. Không có chương này, mọi pattern phía sau đều xây trên cát.
+> Vị trí trong bộ tài liệu: chương cuối của phần Foundations. Chương [01](#/post/01-tai-sao-ddd-ra-doi) chỉ ra business complexity là kẻ thù chính; chương [02](#/post/02-domain-va-subdomain) dạy cách chia domain để phân bổ nguồn lực. Chương này trả lời câu hỏi nền tảng hơn cả hai: **làm sao để những gì team hiểu về nghiệp vụ không bị bóp méo trên đường đi từ cuộc họp vào code**. Không có chương này, mọi pattern phía sau đều xây trên cát.
 
 ## 1. Problem Statement: Chi phí dịch thuật vô hình đang ăn mòn team của bạn
 
@@ -126,7 +126,7 @@ Thử thống nhất từ "Order" cho toàn công ty TMĐT:
 | Kho vận | Danh sách món cần nhặt và đóng gói | Vị trí kệ, cân nặng, kiện |
 | Kế toán | Chứng từ doanh thu | Hóa đơn, thuế, kỳ ghi nhận |
 
-Ba định nghĩa **không hợp nhất được** — và cố hợp nhất sẽ ra một class Order 80 field mà mỗi phòng dùng 15 field (chương 01 đã mổ xẻ). Kết luận nền tảng: **Ubiquitous Language chỉ nhất quán bên trong một ranh giới ngữ nghĩa**. Ranh giới đó chính là Bounded Context — chủ đề chương [04](04-bounded-context.md). Không có ngôn ngữ, không vẽ được ranh giới; đó là lý do chương này đứng trước.
+Ba định nghĩa **không hợp nhất được** — và cố hợp nhất sẽ ra một class Order 80 field mà mỗi phòng dùng 15 field (chương 01 đã mổ xẻ). Kết luận nền tảng: **Ubiquitous Language chỉ nhất quán bên trong một ranh giới ngữ nghĩa**. Ranh giới đó chính là Bounded Context — chủ đề chương [04](#/post/04-bounded-context). Không có ngôn ngữ, không vẽ được ranh giới; đó là lý do chương này đứng trước.
 
 ## 5. Điểm mạnh
 
@@ -178,7 +178,7 @@ Trung thực: **không bao giờ là 0** — đặt tên tử tế luôn đáng 
 
 ## Đọc tiếp
 
-Ngôn ngữ chỉ nhất quán trong một ranh giới — vậy ranh giới đó xác định thế nào, và chuyện gì xảy ra ở biên? [Chương 04 — Bounded Context](04-bounded-context.md).
+Ngôn ngữ chỉ nhất quán trong một ranh giới — vậy ranh giới đó xác định thế nào, và chuyện gì xảy ra ở biên? [Chương 04 — Bounded Context](#/post/04-bounded-context).
 
-- Quay lại: [02 — Domain và Subdomain](02-domain-va-subdomain.md) · [Mục lục](00-muc-luc.md)
-- Liên quan: [10 — Domain Event](10-domain-event.md) (event là ngôn ngữ chung ở dạng chạy được)
+- Quay lại: [02 — Domain và Subdomain](#/post/02-domain-va-subdomain) · [Mục lục](#/post/00-muc-luc)
+- Liên quan: [10 — Domain Event](#/post/10-domain-event) (event là ngôn ngữ chung ở dạng chạy được)

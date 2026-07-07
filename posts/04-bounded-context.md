@@ -1,6 +1,6 @@
 # Chương 04 — Bounded Context: Ranh Giới Ngữ Nghĩa Của Model
 
-> **Vị trí chương này trong chuỗi tài liệu:** Ở [chương 02](02-domain-va-subdomain.md), chúng ta đã mổ xẻ domain và subdomain — tức là *bài toán* mà business đang phải giải. Ở [chương 03](03-ubiquitous-language.md), chúng ta thống nhất rằng ngôn ngữ chung giữa engineer và domain expert là nền móng của mọi model tốt. Chương này trả lời câu hỏi tiếp theo, và cũng là câu hỏi quan trọng bậc nhất của DDD chiến lược: **ngôn ngữ đó, model đó, có hiệu lực đến đâu? Ranh giới của nó nằm ở chỗ nào?** Nếu bạn chỉ được đọc một chương duy nhất trong toàn bộ phần strategic design, hãy đọc chương này. Chương kế tiếp — [05: Context Mapping](05-context-mapping.md) — sẽ nói về chuyện gì xảy ra *giữa* các ranh giới đó.
+> **Vị trí chương này trong chuỗi tài liệu:** Ở [chương 02](#/post/02-domain-va-subdomain), chúng ta đã mổ xẻ domain và subdomain — tức là *bài toán* mà business đang phải giải. Ở [chương 03](#/post/03-ubiquitous-language), chúng ta thống nhất rằng ngôn ngữ chung giữa engineer và domain expert là nền móng của mọi model tốt. Chương này trả lời câu hỏi tiếp theo, và cũng là câu hỏi quan trọng bậc nhất của DDD chiến lược: **ngôn ngữ đó, model đó, có hiệu lực đến đâu? Ranh giới của nó nằm ở chỗ nào?** Nếu bạn chỉ được đọc một chương duy nhất trong toàn bộ phần strategic design, hãy đọc chương này. Chương kế tiếp — [05: Context Mapping](#/post/05-context-mapping) — sẽ nói về chuyện gì xảy ra *giữa* các ranh giới đó.
 
 ---
 
@@ -67,7 +67,7 @@ Bounded Context là câu trả lời của DDD cho vấn đề này. Nhưng trư
 
 **Lý do 4 — Business tự nó không thống nhất, và không cần thống nhất.** Đây là điểm mấu chốt mà engineer hay bỏ qua. Phòng Sales và phòng Kế toán đã dùng từ "khách hàng" theo nghĩa khác nhau *hàng chục năm* mà công ty vẫn vận hành tốt. Sự "mâu thuẫn" ngữ nghĩa này không phải là bug của tổ chức — nó là **feature**: mỗi phòng ban tối ưu ngôn ngữ cho công việc của mình. Phần mềm cố "sửa" sự đa nghĩa này là phần mềm đang chống lại cách business vận hành, và business luôn thắng.
 
-**Lý do 5 — Định luật Conway.** Cấu trúc hệ thống phần mềm phản chiếu cấu trúc giao tiếp của tổ chức làm ra nó. Một model thống nhất đòi hỏi một cấu trúc giao tiếp thống nhất — tức mọi team liên quan phải giao tiếp mật thiết, liên tục, với chi phí thấp. Điều đó không tồn tại ở tổ chức trên ~20 người. Bạn không thể dựng một artifact kỹ thuật (unified model) đi ngược lại cấu trúc giao tiếp thực tế của tổ chức và mong nó sống sót. (Chúng ta sẽ quay lại Conway's Law kỹ hơn ở [chương 05](05-context-mapping.md).)
+**Lý do 5 — Định luật Conway.** Cấu trúc hệ thống phần mềm phản chiếu cấu trúc giao tiếp của tổ chức làm ra nó. Một model thống nhất đòi hỏi một cấu trúc giao tiếp thống nhất — tức mọi team liên quan phải giao tiếp mật thiết, liên tục, với chi phí thấp. Điều đó không tồn tại ở tổ chức trên ~20 người. Bạn không thể dựng một artifact kỹ thuật (unified model) đi ngược lại cấu trúc giao tiếp thực tế của tổ chức và mong nó sống sót. (Chúng ta sẽ quay lại Conway's Law kỹ hơn ở [chương 05](#/post/05-context-mapping).)
 
 ### 2.3. Câu hỏi kiểm chứng
 
@@ -143,7 +143,7 @@ graph TB
     style BC_Billing fill:#f8ede8,stroke:#c62828
 ```
 
-Ba context, ba model "Customer" khác nhau (context Billing thậm chí không gọi nó là Customer). Giữa các context là **contract tường minh** — event hoặc API — chứ không phải là truy cập trực tiếp vào model của nhau. Mỗi mũi tên trên hình là một quan hệ cần quản trị: đó chính là chủ đề của [chương 05 — Context Mapping](05-context-mapping.md).
+Ba context, ba model "Customer" khác nhau (context Billing thậm chí không gọi nó là Customer). Giữa các context là **contract tường minh** — event hoặc API — chứ không phải là truy cập trực tiếp vào model của nhau. Mỗi mũi tên trên hình là một quan hệ cần quản trị: đó chính là chủ đề của [chương 05 — Context Mapping](#/post/05-context-mapping).
 
 ### 4.3. Hệ quả tư duy quan trọng: trùng lặp khái niệm là bình thường, trùng lặp trong một context là bệnh
 
@@ -406,7 +406,7 @@ Lưu ý quan trọng cho người làm thực tế — "database riêng" không 
 
 **Đánh đổi phải trả khi tách dữ liệu (nói thẳng, không tô hồng):**
 - Mất JOIN chéo context → phải composition ở tầng ứng dụng hoặc build read model riêng. Tốn công thật.
-- Mất transaction ACID chéo context → phải chấp nhận eventual consistency + saga/outbox cho luồng liên context. Độ phức tạp tăng đáng kể ([chương 13](13-ddd-va-distributed-systems.md) bàn kỹ).
+- Mất transaction ACID chéo context → phải chấp nhận eventual consistency + saga/outbox cho luồng liên context. Độ phức tạp tăng đáng kể ([chương 13](#/post/13-ddd-va-distributed-systems) bàn kỹ).
 - Dữ liệu duplicate có kiểm soát giữa các context → cần cơ chế đồng bộ qua event và chấp nhận độ trễ.
 
 Nếu hệ của bạn nhỏ (một team, vài module), các chi phí này có thể chưa đáng trả — xem mục 18. Nhưng hãy trả lời trung thực: bạn đang *chọn* hoãn tách dữ liệu như một trade-off có ý thức, hay đang *trôi* vào shared database vì tiện?
@@ -885,7 +885,7 @@ Bounded context làm câu hỏi này *dễ hơn* vì nó tách hai quyết đị
 
 ### 15.3. Integration
 
-- Chi tiết các pattern quan hệ (ai theo ai, ai bảo vệ model bằng ACL, khi nào dùng chung kernel) là toàn bộ [chương 05](05-context-mapping.md). Ở mức chương này, một nguyên tắc: **mọi tương tác xuyên context phải đi qua cửa được tuyên bố** — facade/API/event — và dữ liệu qua cửa là DTO/schema, không phải domain object.
+- Chi tiết các pattern quan hệ (ai theo ai, ai bảo vệ model bằng ACL, khi nào dùng chung kernel) là toàn bộ [chương 05](#/post/05-context-mapping). Ở mức chương này, một nguyên tắc: **mọi tương tác xuyên context phải đi qua cửa được tuyên bố** — facade/API/event — và dữ liệu qua cửa là DTO/schema, không phải domain object.
 - Chuẩn bị sẵn "khớp nối đo được": log/trace gắn context name, dashboard cho lưu lượng xuyên biên. Hai context chat với nhau quá dày đặc là chỉ báo sớm nhất của ranh giới vẽ sai — hãy đo nó thay vì tranh cãi cảm tính.
 - Trong monolith: enforce ranh giới bằng lint kiến trúc (mục 13) và tách schema DB theo context (mục 9.3, mức 1) ngay từ khi còn rẻ.
 
@@ -970,7 +970,7 @@ Ranh giới đã vẽ xong. Nhưng các context không sống cô lập — chú
 
 ## Đọc tiếp
 
-- **Chương tiếp theo: [05 — Context Mapping: Các Pattern Quan Hệ Giữa Các Bounded Context](05-context-mapping.md)** — Partnership, Shared Kernel, Customer/Supplier, Conformist, Anti-Corruption Layer, Open Host Service, Published Language, Separate Ways, Big Ball of Mud — và vì sao context map là tài liệu chính trị quan trọng nhất mà một architect có thể vẽ.
-- Chương trước: [03 — Ubiquitous Language](03-ubiquitous-language.md)
-- Về mục lục: [00 — Mục lục](00-muc-luc.md)
-- Nhảy tới tactical design: [06 — Entity và Value Object](06-entity-va-value-object.md)
+- **Chương tiếp theo: [05 — Context Mapping: Các Pattern Quan Hệ Giữa Các Bounded Context](#/post/05-context-mapping)** — Partnership, Shared Kernel, Customer/Supplier, Conformist, Anti-Corruption Layer, Open Host Service, Published Language, Separate Ways, Big Ball of Mud — và vì sao context map là tài liệu chính trị quan trọng nhất mà một architect có thể vẽ.
+- Chương trước: [03 — Ubiquitous Language](#/post/03-ubiquitous-language)
+- Về mục lục: [00 — Mục lục](#/post/00-muc-luc)
+- Nhảy tới tactical design: [06 — Entity và Value Object](#/post/06-entity-va-value-object)

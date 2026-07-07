@@ -1,6 +1,6 @@
 # Chương 02 — Domain và Subdomain: Bản đồ chiến lược trước khi viết dòng code đầu tiên
 
-> **Vị trí trong bộ tài liệu:** Chương trước ([01 — Tại sao DDD ra đời](01-tai-sao-ddd-ra-doi.md)) đã xác lập rằng business complexity là kẻ thù chính và DDD là phương pháp tư duy để quản lý nó. Chương này trả lời câu hỏi chiến lược đầu tiên mà mọi Architect phải trả lời **trước khi** chọn công nghệ, vẽ kiến trúc hay tạo class: *độ phức tạp nghiệp vụ nằm ở đâu trong doanh nghiệp, phần nào tạo ra tiền, và phần nào đáng đầu tư kỹ sư giỏi nhất?* Đây là nội dung Strategic Design thuần túy — chưa có một dòng Entity hay Aggregate nào. Chương tiếp theo: [03 — Ubiquitous Language](03-ubiquitous-language.md). Mục lục: [00-muc-luc.md](00-muc-luc.md).
+> **Vị trí trong bộ tài liệu:** Chương trước ([01 — Tại sao DDD ra đời](#/post/01-tai-sao-ddd-ra-doi)) đã xác lập rằng business complexity là kẻ thù chính và DDD là phương pháp tư duy để quản lý nó. Chương này trả lời câu hỏi chiến lược đầu tiên mà mọi Architect phải trả lời **trước khi** chọn công nghệ, vẽ kiến trúc hay tạo class: *độ phức tạp nghiệp vụ nằm ở đâu trong doanh nghiệp, phần nào tạo ra tiền, và phần nào đáng đầu tư kỹ sư giỏi nhất?* Đây là nội dung Strategic Design thuần túy — chưa có một dòng Entity hay Aggregate nào. Chương tiếp theo: [03 — Ubiquitous Language](#/post/03-ubiquitous-language). Mục lục: [00-muc-luc.md](#/post/00-muc-luc).
 
 ---
 
@@ -51,7 +51,7 @@ Trực giác của Evans đến từ quan sát: mọi doanh nghiệp đều có 
 ### 2.2. Định nghĩa làm việc — sau khi đã có vấn đề
 
 - **Domain**: toàn bộ lĩnh vực hoạt động và tri thức mà doanh nghiệp vận hành trong đó. Domain của GiaoTốc là "giao nhận hàng hóa"; của fintech kia là "cho vay tiêu dùng". Domain thuộc về **không gian bài toán (problem space)** — nó tồn tại dù bạn có viết phần mềm hay không.
-- **Subdomain**: một vùng nghiệp vụ tương đối tự trị bên trong Domain, với ngôn ngữ, quy tắc và chuyên gia riêng. "Điều phối tài xế", "tính cước", "quản lý kho", "kế toán" là các Subdomain của GiaoTốc. Quan trọng: Subdomain cũng thuộc **problem space** — bạn *khám phá* ra chúng (chúng có sẵn trong cách doanh nghiệp vận hành), chứ không *thiết kế* ra chúng. Thứ bạn thiết kế là Bounded Context — thuộc không gian lời giải (solution space) — và đó là [chương 04](04-bounded-context.md). Nhầm hai thứ này là lỗi kinh điển, ta sẽ quay lại ở mục Anti-patterns.
+- **Subdomain**: một vùng nghiệp vụ tương đối tự trị bên trong Domain, với ngôn ngữ, quy tắc và chuyên gia riêng. "Điều phối tài xế", "tính cước", "quản lý kho", "kế toán" là các Subdomain của GiaoTốc. Quan trọng: Subdomain cũng thuộc **problem space** — bạn *khám phá* ra chúng (chúng có sẵn trong cách doanh nghiệp vận hành), chứ không *thiết kế* ra chúng. Thứ bạn thiết kế là Bounded Context — thuộc không gian lời giải (solution space) — và đó là [chương 04](#/post/04-bounded-context). Nhầm hai thứ này là lỗi kinh điển, ta sẽ quay lại ở mục Anti-patterns.
 
 Ba loại Subdomain:
 
@@ -195,7 +195,7 @@ Diễn giải từng ô — kèm phần "vì sao" và "đánh đổi":
 
 **BUILD cho Core.** Vì lợi thế cạnh tranh theo định nghĩa là thứ không mua được — nếu mua được thì đối thủ cũng mua được, hết lợi thế. Đánh đổi: đắt nhất, chậm nhất, rủi ro nhất — chấp nhận được *chỉ vì* phần thưởng bất đối xứng. Hệ quả kiến trúc: đây là nơi duy nhất mặc định xứng đáng với DDD "full option" — rich model, Ubiquitous Language chặt chẽ, Event Storming định kỳ, kỹ sư giỏi nhất, và **không bao giờ giao cho outsourcing** (bạn sẽ mất chính quá trình học — knowledge crunching — vốn là một nửa giá trị).
 
-**BUY cho Generic.** Vì bạn đang mua hàng nghìn giờ kỹ sư của vendor với giá subscription — bài toán của họ là Core của họ, họ làm tốt hơn bạn mãi mãi. Đánh đổi: khớp ~80% nhu cầu, phụ thuộc roadmap vendor, chi phí thoát (exit cost). Kỷ luật bắt buộc: **bọc vendor sau một adapter/anti-corruption layer** ([05 — Context Mapping](05-context-mapping.md)) để ngày đổi vendor không phải mổ toàn thân.
+**BUY cho Generic.** Vì bạn đang mua hàng nghìn giờ kỹ sư của vendor với giá subscription — bài toán của họ là Core của họ, họ làm tốt hơn bạn mãi mãi. Đánh đổi: khớp ~80% nhu cầu, phụ thuộc roadmap vendor, chi phí thoát (exit cost). Kỷ luật bắt buộc: **bọc vendor sau một adapter/anti-corruption layer** ([05 — Context Mapping](#/post/05-context-mapping)) để ngày đổi vendor không phải mổ toàn thân.
 
 **BUILD-đơn-giản hoặc OUTSOURCE cho Supporting.** Đây là vùng quyết định tinh tế nhất. Build đơn giản khi nghiệp vụ còn đổi thường xuyên (vòng phản hồi nội bộ nhanh hơn vòng hợp đồng outsource). Outsource khi spec đã ổn định và ít tiến hóa. Đánh đổi của outsource: chi phí giao tiếp + chất lượng khó kiểm — nên chỉ giao thứ *mô tả được trọn vẹn bằng spec*. Theo định nghĩa, Core không bao giờ mô tả được trọn vẹn bằng spec (nếu được thì nó đã không phải Core).
 
@@ -301,8 +301,8 @@ Khi toàn bộ hệ thống nằm gọn trong một quyết định đầu tư: 
 
 ## Đọc tiếp
 
-Đã biết *đầu tư vào đâu*. Câu hỏi tiếp theo: những gì team hiểu về từng vùng nghiệp vụ làm sao đi vào code mà không méo mó? [Chương 03 — Ubiquitous Language](03-ubiquitous-language.md).
+Đã biết *đầu tư vào đâu*. Câu hỏi tiếp theo: những gì team hiểu về từng vùng nghiệp vụ làm sao đi vào code mà không méo mó? [Chương 03 — Ubiquitous Language](#/post/03-ubiquitous-language).
 
-- Quay lại: [01 — Tại sao DDD ra đời](01-tai-sao-ddd-ra-doi.md) · [Mục lục](00-muc-luc.md)
-- Liên quan: [04 — Bounded Context](04-bounded-context.md) (subdomain thuộc problem space, bounded context thuộc solution space — cặp khái niệm hay bị nhầm nhất)
+- Quay lại: [01 — Tại sao DDD ra đời](#/post/01-tai-sao-ddd-ra-doi) · [Mục lục](#/post/00-muc-luc)
+- Liên quan: [04 — Bounded Context](#/post/04-bounded-context) (subdomain thuộc problem space, bounded context thuộc solution space — cặp khái niệm hay bị nhầm nhất)
 
