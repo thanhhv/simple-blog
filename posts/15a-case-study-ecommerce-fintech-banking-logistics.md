@@ -1,6 +1,6 @@
 # Chương 15a — Case Study: E-commerce, FinTech, Banking, Logistics
 
-> **Vị trí trong bộ tài liệu:** Đây là chương đầu tiên trong cặp chương case study (15a/15b), đứng sau [Chương 14 — DDD trong Production](14-ddd-trong-production.md). Toàn bộ lý thuyết từ chương 01–14 — Subdomain, Bounded Context, Context Mapping, Aggregate, Domain Event, kiến trúc và distributed systems — sẽ được "thử lửa" qua 4 ngành có độ phức tạp domain rất khác nhau: **E-commerce, FinTech (ví điện tử/payment), Banking (core banking + lending), Logistics (last-mile delivery)**. Mục tiêu không phải là đưa cho bạn thiết kế để copy, mà là cho bạn thấy **cách lập luận**: cùng một pattern, tại sao ngành này dùng còn ngành kia thì không.
+> **Vị trí trong bộ tài liệu:** Đây là chương đầu tiên trong cặp chương case study (15a/15b), đứng sau [Chương 14 — DDD trong Production](#/post/14-ddd-trong-production). Toàn bộ lý thuyết từ chương 01–14 — Subdomain, Bounded Context, Context Mapping, Aggregate, Domain Event, kiến trúc và distributed systems — sẽ được "thử lửa" qua 4 ngành có độ phức tạp domain rất khác nhau: **E-commerce, FinTech (ví điện tử/payment), Banking (core banking + lending), Logistics (last-mile delivery)**. Mục tiêu không phải là đưa cho bạn thiết kế để copy, mà là cho bạn thấy **cách lập luận**: cùng một pattern, tại sao ngành này dùng còn ngành kia thì không.
 
 Trước khi vào từng ngành, một nguyên tắc xuyên suốt mà tôi muốn bạn giữ trong đầu: **thiết kế DDD tốt là thiết kế phản chiếu đúng nơi business kiếm tiền và nơi business chết nếu làm sai**. E-commerce chết vì bán hàng không có trong kho và trải nghiệm checkout tệ. FinTech chết vì lệch tiền một đồng. Banking chết vì vi phạm compliance và mất audit trail. Logistics chết vì tối ưu route kém làm chi phí giao mỗi đơn cao hơn đối thủ. Bốn "điểm chết" khác nhau → bốn cách phân bổ nỗ lực thiết kế khác nhau, dù kỹ thuật nền tảng giống hệt nhau.
 
@@ -968,6 +968,6 @@ Ba bài học xuyên ngành đáng mang theo:
 
 ## Đọc tiếp
 
-→ [Chương 15b — Case Study: SaaS, Blockchain, Booking, Social Network](15b-case-study-saas-blockchain-booking-social.md): bốn ngành với các thái cực khác — tenant isolation, tiền on-chain/off-chain, tranh chấp tài nguyên theo thời gian, và hệ thống read-heavy nơi eventual consistency là mặc định.
+→ [Chương 15b — Case Study: SaaS, Blockchain, Booking, Social Network](#/post/15b-case-study-saas-blockchain-booking-social): bốn ngành với các thái cực khác — tenant isolation, tiền on-chain/off-chain, tranh chấp tài nguyên theo thời gian, và hệ thống read-heavy nơi eventual consistency là mặc định.
 
-Tham chiếu lý thuyết: [Chương 07 — Aggregate](07-aggregate.md) · [Chương 05 — Context Mapping](05-context-mapping.md) · [Chương 10 — Domain Event](10-domain-event.md) · [Chương 13 — DDD và Distributed Systems](13-ddd-va-distributed-systems.md)
+Tham chiếu lý thuyết: [Chương 07 — Aggregate](#/post/07-aggregate) · [Chương 05 — Context Mapping](#/post/05-context-mapping) · [Chương 10 — Domain Event](#/post/10-domain-event) · [Chương 13 — DDD và Distributed Systems](#/post/13-ddd-va-distributed-systems)

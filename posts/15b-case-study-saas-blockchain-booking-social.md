@@ -1,6 +1,6 @@
 # Chương 15b — Case Study: SaaS, Blockchain, Booking System, Social Network
 
-> Vị trí trong bộ tài liệu: nửa sau của phần case study. [Chương 15a](15a-case-study-ecommerce-fintech-banking-logistics.md) đi qua bốn ngành "kinh điển"; chương này chọn bốn ngành ở các **thái cực khác nhau của trục nhất quán**: SaaS (ranh giới tenant là luật sống còn), Blockchain exchange (nguồn sự thật nằm một nửa ngoài hệ thống của bạn), Booking (tranh chấp tài nguyên theo thời gian — bài toán strong consistency thuần khiết nhất), và Social Network (read-heavy, eventual consistency là mặc định nhưng moderation phức tạp bất ngờ). Đọc bốn ngành cạnh nhau để thấy: cùng một bộ pattern, liều lượng và điểm đặt hoàn toàn khác nhau — đó chính là kỹ năng của kiến trúc sư.
+> Vị trí trong bộ tài liệu: nửa sau của phần case study. [Chương 15a](#/post/15a-case-study-ecommerce-fintech-banking-logistics) đi qua bốn ngành "kinh điển"; chương này chọn bốn ngành ở các **thái cực khác nhau của trục nhất quán**: SaaS (ranh giới tenant là luật sống còn), Blockchain exchange (nguồn sự thật nằm một nửa ngoài hệ thống của bạn), Booking (tranh chấp tài nguyên theo thời gian — bài toán strong consistency thuần khiết nhất), và Social Network (read-heavy, eventual consistency là mặc định nhưng moderation phức tạp bất ngờ). Đọc bốn ngành cạnh nhau để thấy: cùng một bộ pattern, liều lượng và điểm đặt hoàn toàn khác nhau — đó chính là kỹ năng của kiến trúc sư.
 
 ## 1. SaaS B2B multi-tenant
 
@@ -387,6 +387,6 @@ Bốn ngành, một bài học: **pattern là bất biến, điểm đặt là n
 
 ## Đọc tiếp
 
-Khép lại bộ tài liệu bằng tấm bản đồ những cái bẫy — và câu hỏi quan trọng nhất: khi nào nên để DDD ở nhà: [Chương 16 — Anti-patterns & Khi nào KHÔNG nên dùng DDD](16-anti-patterns-va-khi-nao-khong-dung-ddd.md).
+Khép lại bộ tài liệu bằng tấm bản đồ những cái bẫy — và câu hỏi quan trọng nhất: khi nào nên để DDD ở nhà: [Chương 16 — Anti-patterns & Khi nào KHÔNG nên dùng DDD](#/post/16-anti-patterns-va-khi-nao-khong-dung-ddd).
 
-- Quay lại: [15a — Case Study: E-commerce, FinTech, Banking, Logistics](15a-case-study-ecommerce-fintech-banking-logistics.md) · [Mục lục](00-muc-luc.md)
+- Quay lại: [15a — Case Study: E-commerce, FinTech, Banking, Logistics](#/post/15a-case-study-ecommerce-fintech-banking-logistics) · [Mục lục](#/post/00-muc-luc)

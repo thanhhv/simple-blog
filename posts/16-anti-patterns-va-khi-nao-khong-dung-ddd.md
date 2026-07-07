@@ -164,7 +164,7 @@ func (s *LoyaltyService) AddPoints(ctx context.Context, id CustomerID, pts Point
 
 ### 16.1.3 Shared Domain Model giữa các context
 
-**Mô tả.** Một class `Product`/`Customer`/`Order` "dùng chung" cho mọi bounded context — thường nằm trong package `common/`, `shared/`, hoặc một thư viện `company-domain-models` được mọi service import. Xuất phát từ trực giác DRY: "Product là Product, viết hai lần làm gì?". Nhưng như chương [04](04-bounded-context.md) đã chỉ ra: `Product` của Catalog (mô tả, ảnh, SEO) và `Product` của Inventory (tồn kho, vị trí kệ) và `Product` của Pricing (giá, thuế) là **ba khái niệm khác nhau tình cờ trùng tên**. DRY áp dụng cho *tri thức*, không phải cho *chữ*.
+**Mô tả.** Một class `Product`/`Customer`/`Order` "dùng chung" cho mọi bounded context — thường nằm trong package `common/`, `shared/`, hoặc một thư viện `company-domain-models` được mọi service import. Xuất phát từ trực giác DRY: "Product là Product, viết hai lần làm gì?". Nhưng như chương [04](#/post/04-bounded-context) đã chỉ ra: `Product` của Catalog (mô tả, ảnh, SEO) và `Product` của Inventory (tồn kho, vị trí kệ) và `Product` của Pricing (giá, thuế) là **ba khái niệm khác nhau tình cờ trùng tên**. DRY áp dụng cho *tri thức*, không phải cho *chữ*.
 
 **Nhận biết trong code thật (TypeScript):**
 
@@ -276,7 +276,7 @@ Dấu hiệu: hàm `WithinTx`/`@Transactional` ở application service mà bên 
 
 **Vì sao nguy hiểm.** *Kỹ thuật:* transaction càng rộng, lock giữ càng lâu, deadlock và contention tăng theo cấp số; hot aggregate (Inventory của sản phẩm đang sale) thành nút cổ chai toàn hệ thống. *Kiến trúc:* nó hàn cứng các aggregate — và cả các context — vào một DB vĩnh viễn; mọi kế hoạch tách sau này chết từ đây. *Nghiệp vụ — điểm ít người để ý nhất:* nó thường **mã hóa sai nghiệp vụ thật**. Hỏi domain expert: "đơn đặt thành công nhưng cộng điểm loyalty trễ 5 giây thì có sao không?" — "Không sao." Nghĩa là nhất quán tức thì ở đây là *yêu cầu bịa* của engineer, và bạn đang trả giá hiệu năng + coupling cho một yêu cầu không tồn tại.
 
-**Cách sửa.** Quy tắc: **một transaction — một aggregate; phần còn lại đi bằng domain event** (chương [10](10-domain-event.md)), với outbox pattern để không mất event (chương [13](13-ddd-va-distributed-systems.md)):
+**Cách sửa.** Quy tắc: **một transaction — một aggregate; phần còn lại đi bằng domain event** (chương [10](#/post/10-domain-event)), với outbox pattern để không mất event (chương [13](#/post/13-ddd-va-distributed-systems)):
 
 ```go
 // SỬA: transaction chỉ ôm Order + outbox; phần còn lại eventual
@@ -368,19 +368,19 @@ Bài kiểm 30 giây: mở aggregate lớn nhất của codebase, đếm số me
 
 ### 16.1.8 Ubiquitous Language chỉ tồn tại trong tài liệu
 
-**Mô tả**: có glossary trên Confluence, có buổi event storming chụp ảnh đăng Slack — nhưng code vẫn `data`, `info`, `processOrder(payload)`, ticket vẫn viết bằng từ của dev, và domain expert sáu tháng chưa được hỏi lại câu nào. **Nhận biết**: lấy 5 từ quan trọng nhất trong glossary, grep codebase — không ra kết quả nào là ngôn ngữ đã chết lâm sàng. **Vì sao nguy hiểm**: mọi pattern tactical phía sau đặt tên theo một ngôn ngữ không ai nói — model đúng hình thức nhưng lệch ngữ nghĩa, và độ lệch tăng dần theo mỗi tính năng (chương [03](03-ubiquitous-language.md) đã phân tích cơ chế). **Cách sửa**: đưa ngôn ngữ vào Definition of Done của PR; mỗi sprint một lần rename theo glossary; và quan trọng nhất — nối lại kênh nói chuyện định kỳ với domain expert, vì ngôn ngữ chết là *triệu chứng* của kênh giao tiếp chết.
+**Mô tả**: có glossary trên Confluence, có buổi event storming chụp ảnh đăng Slack — nhưng code vẫn `data`, `info`, `processOrder(payload)`, ticket vẫn viết bằng từ của dev, và domain expert sáu tháng chưa được hỏi lại câu nào. **Nhận biết**: lấy 5 từ quan trọng nhất trong glossary, grep codebase — không ra kết quả nào là ngôn ngữ đã chết lâm sàng. **Vì sao nguy hiểm**: mọi pattern tactical phía sau đặt tên theo một ngôn ngữ không ai nói — model đúng hình thức nhưng lệch ngữ nghĩa, và độ lệch tăng dần theo mỗi tính năng (chương [03](#/post/03-ubiquitous-language) đã phân tích cơ chế). **Cách sửa**: đưa ngôn ngữ vào Definition of Done của PR; mỗi sprint một lần rename theo glossary; và quan trọng nhất — nối lại kênh nói chuyện định kỳ với domain expert, vì ngôn ngữ chết là *triệu chứng* của kênh giao tiếp chết.
 
 ### 16.1.9 Event như RPC trá hình
 
-**Mô tả**: phát "event" `SendWelcomeEmailRequested`, `DeductInventoryCommand` — tên là event, ngữ nghĩa là mệnh lệnh chờ đúng một kẻ thi hành. **Nhận biết**: tên event chứa động từ nguyên thể/mệnh lệnh thay vì quá khứ; producer *biết và cần* consumer cụ thể làm gì; nếu consumer đó tắt thì luồng nghiệp vụ của producer coi như fail. **Vì sao nguy hiểm**: bạn nhận đủ nhược điểm của cả hai thế giới — coupling ngữ nghĩa chặt như gọi hàm trực tiếp, nhưng mất stack trace, mất type-check, thêm độ trễ và thêm broker phải nuôi. Khi cần ra lệnh, hãy ra lệnh tường minh (command + handler, hoặc gọi API); event chỉ dành cho *thông báo điều đã xảy ra* mà producer không quan tâm ai phản ứng (chương [10](10-domain-event.md), mục anti-pattern).
+**Mô tả**: phát "event" `SendWelcomeEmailRequested`, `DeductInventoryCommand` — tên là event, ngữ nghĩa là mệnh lệnh chờ đúng một kẻ thi hành. **Nhận biết**: tên event chứa động từ nguyên thể/mệnh lệnh thay vì quá khứ; producer *biết và cần* consumer cụ thể làm gì; nếu consumer đó tắt thì luồng nghiệp vụ của producer coi như fail. **Vì sao nguy hiểm**: bạn nhận đủ nhược điểm của cả hai thế giới — coupling ngữ nghĩa chặt như gọi hàm trực tiếp, nhưng mất stack trace, mất type-check, thêm độ trễ và thêm broker phải nuôi. Khi cần ra lệnh, hãy ra lệnh tường minh (command + handler, hoặc gọi API); event chỉ dành cho *thông báo điều đã xảy ra* mà producer không quan tâm ai phản ứng (chương [10](#/post/10-domain-event), mục anti-pattern).
 
 ### 16.1.10 Bounded Context = Microservice một cách máy móc
 
-**Mô tả**: đọc xong chương strategic design, team vẽ được 8 bounded context — và lập tức dựng 8 repo, 8 pipeline, 8 database. **Vì sao nguy hiểm**: bounded context là ranh giới *ngữ nghĩa của model*; microservice là ranh giới *triển khai và vận hành*. Trùng nhau được thì tốt, nhưng quan hệ đúng là "một service không nên chứa nhiều hơn một context" chứ không phải "mỗi context một service". Tách 8 service với một team 6 người là mua toàn bộ chi phí chương [13](13-ddd-va-distributed-systems.md) (outbox, saga, idempotency, distributed debugging) để giải một bài toán tổ chức... không tồn tại — vì chỉ có một team. Kết quả kinh điển: distributed monolith — 8 service deploy phải cùng nhau, gọi nhau đồng bộ dây chuyền, một cái chết kéo cả chùm. **Cách sửa**: modular monolith với ranh giới module = ranh giới context (chương [12](12-ddd-va-kien-truc.md)); tách service khi và chỉ khi có *lực kéo vận hành đo được* — team đông phải chia, nhu cầu scale lệch nhau, nhịp deploy xung đột (chương [14](14-ddd-trong-production.md)).
+**Mô tả**: đọc xong chương strategic design, team vẽ được 8 bounded context — và lập tức dựng 8 repo, 8 pipeline, 8 database. **Vì sao nguy hiểm**: bounded context là ranh giới *ngữ nghĩa của model*; microservice là ranh giới *triển khai và vận hành*. Trùng nhau được thì tốt, nhưng quan hệ đúng là "một service không nên chứa nhiều hơn một context" chứ không phải "mỗi context một service". Tách 8 service với một team 6 người là mua toàn bộ chi phí chương [13](#/post/13-ddd-va-distributed-systems) (outbox, saga, idempotency, distributed debugging) để giải một bài toán tổ chức... không tồn tại — vì chỉ có một team. Kết quả kinh điển: distributed monolith — 8 service deploy phải cùng nhau, gọi nhau đồng bộ dây chuyền, một cái chết kéo cả chùm. **Cách sửa**: modular monolith với ranh giới module = ranh giới context (chương [12](#/post/12-ddd-va-kien-truc)); tách service khi và chỉ khi có *lực kéo vận hành đo được* — team đông phải chia, nhu cầu scale lệch nhau, nhịp deploy xung đột (chương [14](#/post/14-ddd-trong-production)).
 
 ### 16.1.11 DDD-lite mọi nơi — trải mỏng thay vì đầu tư đúng chỗ
 
-**Mô tả**: áp một "chuẩn DDD toàn công ty" đồng đều cho mọi module — CRUD danh mục cũng aggregate + repository interface + 4 tầng như core domain. Nghe có vẻ kỷ luật, thực chất là phiên bản tổ chức của cargo cult: chi phí trải đều, lợi ích dồn cục. **Vì sao nguy hiểm**: vi phạm chính nguyên lý chiến lược nền tảng nhất của DDD (chương [02](02-domain-va-subdomain.md)) — nguồn lực phải dồn cho Core Domain. Team tiêu 40% quỹ thời gian để duy trì nghi lễ ở các module Supporting/Generic, và đến lượt core domain cần modeling sâu thì hết quỹ. **Cách sửa**: bản đồ subdomain quyết định "liều lượng" — core: full tactical + strategic; supporting: transaction script sạch sẽ; generic: mua/dùng framework thẳng. Sự không đồng đều này là *có chủ đích và lành mạnh*.
+**Mô tả**: áp một "chuẩn DDD toàn công ty" đồng đều cho mọi module — CRUD danh mục cũng aggregate + repository interface + 4 tầng như core domain. Nghe có vẻ kỷ luật, thực chất là phiên bản tổ chức của cargo cult: chi phí trải đều, lợi ích dồn cục. **Vì sao nguy hiểm**: vi phạm chính nguyên lý chiến lược nền tảng nhất của DDD (chương [02](#/post/02-domain-va-subdomain)) — nguồn lực phải dồn cho Core Domain. Team tiêu 40% quỹ thời gian để duy trì nghi lễ ở các module Supporting/Generic, và đến lượt core domain cần modeling sâu thì hết quỹ. **Cách sửa**: bản đồ subdomain quyết định "liều lượng" — core: full tactical + strategic; supporting: transaction script sạch sẽ; generic: mua/dùng framework thẳng. Sự không đồng đều này là *có chủ đích và lành mạnh*.
 
 ---
 
@@ -427,7 +427,7 @@ Diễn giải thành bốn mức, kèm ngưỡng gợi ý:
 | **2 — Tactical chọn lọc** | Có ≥ 1 vùng rule dày (tính giá, tồn kho, trạng thái đơn), team 5–15 | Vùng rule dày: aggregate + domain event + repository interface đúng bài. Vùng còn lại: mức 1. Modular monolith |
 | **3 — Full strategic + tactical** | Nhiều team, nhiều context, business phức tạp, hệ thống sống nhiều năm | Toàn bộ tài liệu này: subdomain map, context map, team alignment, và các pattern chương 13 khi tách service |
 
-Hai quy tắc dùng ma trận: (1) **đánh giá theo từng bounded context**, không theo cả công ty; (2) **được phép lên mức dần** — mức 1 hôm nay không cản mức 3 sau này, ngược lại chính là đường nâng cấp tự nhiên (chương [14](14-ddd-trong-production.md), incremental adoption). Sai lầm cần tránh là *nhảy* mức: từ 0 lên 3 trong một quý là công thức cargo cult.
+Hai quy tắc dùng ma trận: (1) **đánh giá theo từng bounded context**, không theo cả công ty; (2) **được phép lên mức dần** — mức 1 hôm nay không cản mức 3 sau này, ngược lại chính là đường nâng cấp tự nhiên (chương [14](#/post/14-ddd-trong-production), incremental adoption). Sai lầm cần tránh là *nhảy* mức: từ 0 lên 3 trong một quý là công thức cargo cult.
 
 ---
 
@@ -466,4 +466,4 @@ Chúc bạn xây được những hệ thống mà ba năm sau người kế nhi
 
 ---
 
-- Quay lại: [15b — Case Study: SaaS, Blockchain, Booking, Social](15b-case-study-saas-blockchain-booking-social.md) · [Mục lục](00-muc-luc.md)
+- Quay lại: [15b — Case Study: SaaS, Blockchain, Booking, Social](#/post/15b-case-study-saas-blockchain-booking-social) · [Mục lục](#/post/00-muc-luc)

@@ -426,7 +426,7 @@ func (d *Dispatcher) Dispatch(ctx context.Context, events ...domain.DomainEvent)
 }
 ```
 
-Ghi chú trung thực về dispatcher in-process: gọi handler *sau khi commit* nghĩa là nếu process chết giữa chừng, một số handler chưa chạy — event "mất". Với handler chỉ-tiện-ích (email) có thể chấp nhận; với handler nghiệp vụ (giữ kho) thì không — lời giải đầy đủ là **outbox pattern**: event ghi vào bảng outbox *cùng transaction* với aggregate, một relay đọc outbox và phát lại đến khi thành công. Chi tiết ở [chương 13](13-ddd-va-distributed-systems.md); ở tầm chương này chỉ cần nhớ: *mức độ đảm bảo giao event là một quyết định thiết kế theo từng handler, không phải mặc định của framework*.
+Ghi chú trung thực về dispatcher in-process: gọi handler *sau khi commit* nghĩa là nếu process chết giữa chừng, một số handler chưa chạy — event "mất". Với handler chỉ-tiện-ích (email) có thể chấp nhận; với handler nghiệp vụ (giữ kho) thì không — lời giải đầy đủ là **outbox pattern**: event ghi vào bảng outbox *cùng transaction* với aggregate, một relay đọc outbox và phát lại đến khi thành công. Chi tiết ở [chương 13](#/post/13-ddd-va-distributed-systems); ở tầm chương này chỉ cần nhớ: *mức độ đảm bảo giao event là một quyết định thiết kế theo từng handler, không phải mặc định của framework*.
 
 ### 4.6. Event versioning cơ bản
 
@@ -490,7 +490,7 @@ Khi hành động không có side-effect ngoài chính nó (CRUD danh mục — 
 
 ## Đọc tiếp
 
-Business rule dạng điều kiện — "khách này có đủ điều kiện áp mã?" — không phải event cũng chẳng phải service. Nó có pattern riêng: [Chương 11 — Specification](11-specification.md).
+Business rule dạng điều kiện — "khách này có đủ điều kiện áp mã?" — không phải event cũng chẳng phải service. Nó có pattern riêng: [Chương 11 — Specification](#/post/11-specification).
 
-- Quay lại: [09 — Domain Service và Application Service](09-domain-service-va-application-service.md) · [Mục lục](00-muc-luc.md)
-- Liên quan trực tiếp: [07 — Aggregate](07-aggregate.md) (event sinh từ đâu) · [13 — DDD và Distributed Systems](13-ddd-va-distributed-systems.md) (outbox, idempotency, saga — phần "vận hành" của event)
+- Quay lại: [09 — Domain Service và Application Service](#/post/09-domain-service-va-application-service) · [Mục lục](#/post/00-muc-luc)
+- Liên quan trực tiếp: [07 — Aggregate](#/post/07-aggregate) (event sinh từ đâu) · [13 — DDD và Distributed Systems](#/post/13-ddd-va-distributed-systems) (outbox, idempotency, saga — phần "vận hành" của event)

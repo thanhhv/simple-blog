@@ -1,6 +1,6 @@
 # Chương 14: DDD trong Production — Refactoring, Adoption, Tổ chức Team và Vận hành Dài hạn
 
-> **Vị trí chương này trong tài liệu:** Sau khi đã nắm toàn bộ tactical patterns (chương 06–11), kiến trúc (chương 12) và distributed systems (chương 13), chương này trả lời câu hỏi thực tế nhất: *làm sao đưa DDD vào một hệ thống đang chạy, đang có khách hàng, đang có team, đang có deadline?* Đây là chương dành cho những người phải sống với hệ quả của quyết định kiến trúc — không phải trên slide, mà trong production lúc 2 giờ sáng. Chương tiếp theo ([15a](15a-case-study-ecommerce-fintech-banking-logistics.md)) sẽ áp dụng toàn bộ những gì bàn ở đây vào các case study cụ thể.
+> **Vị trí chương này trong tài liệu:** Sau khi đã nắm toàn bộ tactical patterns (chương 06–11), kiến trúc (chương 12) và distributed systems (chương 13), chương này trả lời câu hỏi thực tế nhất: *làm sao đưa DDD vào một hệ thống đang chạy, đang có khách hàng, đang có team, đang có deadline?* Đây là chương dành cho những người phải sống với hệ quả của quyết định kiến trúc — không phải trên slide, mà trong production lúc 2 giờ sáng. Chương tiếp theo ([15a](#/post/15a-case-study-ecommerce-fintech-banking-logistics)) sẽ áp dụng toàn bộ những gì bàn ở đây vào các case study cụ thể.
 
 ---
 
@@ -305,7 +305,7 @@ Từ first principles: DDD là **một tập pattern tương đối độc lập
 
 ### 14.2.2 Bắt đầu từ Core Domain — và chỉ Core Domain
 
-Phân loại core / supporting / generic subdomain (chương [02](02-domain-va-subdomain.md)) không phải bài tập học thuật — trong adoption nó quyết định **nơi đổ effort**:
+Phân loại core / supporting / generic subdomain (chương [02](#/post/02-domain-va-subdomain)) không phải bài tập học thuật — trong adoption nó quyết định **nơi đổ effort**:
 
 - **Core domain:** nơi duy nhất đáng dùng DDD "đậm đặc". Độ phức tạp nghiệp vụ cao nhất, thay đổi nhiều nhất, và là thứ công ty kiếm tiền nhờ làm *khác* đối thủ. Pilot context nên nằm ở đây (như Pricing ở 14.1.6).
 - **Supporting subdomain:** tactical pattern nhẹ — value object, module gọn, tên gọi đúng. Không cần aggregate cầu kỳ.
@@ -373,7 +373,7 @@ Cuốn "Team Topologies" (Skelton & Pais, 2019) cung cấp bộ từ vựng tổ
 
 Quy tắc ghép quan trọng nhất: **một bounded context không bao giờ thuộc về nhiều hơn một team.** Chiều ngược lại thì lỏng hơn — một team có thể sở hữu 2–3 context nhỏ, miễn tổng cognitive load chịu được. "Cognitive load" ở đây là khái niệm định lượng được một cách thô: nếu một engineer mới cần hơn ~3 tháng để dám sửa code ở mọi vùng team sở hữu, team đó đang ôm quá nhiều.
 
-Tương tác giữa các team cũng nên khớp với context mapping (chương [05](05-context-mapping.md)):
+Tương tác giữa các team cũng nên khớp với context mapping (chương [05](#/post/05-context-mapping)):
 
 - **Customer/Supplier** giữa hai context ⇒ quan hệ *X-as-a-Service* giữa hai team, có contract, có version.
 - **Partnership** ⇒ *collaboration mode* — hai team làm việc sát trong một giai đoạn; đắt, chỉ nên tạm thời.
@@ -689,7 +689,7 @@ Tỉ lệ tham khảo cho một context trưởng thành: hàng trăm test tần
 
 Hai bài toán performance đặc thù của hệ DDD, và cách xử lý không phản bội model:
 
-**Lazy vs eager load aggregate.** Nguyên tắc gốc: aggregate là *đơn vị nhất quán*, nên khi load để **thay đổi trạng thái**, load nguyên con (eager) — vì invariant cần nhìn thấy toàn bộ. `Order` kiểm tra "tổng ≤ hạn mức" mà lazy-load từng dòng hàng là vừa N+1 query vừa rủi ro invariant tính trên dữ liệu chưa load. Nếu eager load một aggregate mà *đau* (hàng nghìn dòng, hàng chục MB), thì vấn đề không nằm ở chiến lược load — **aggregate quá to, ranh giới sai** (xem chương [07](07-aggregate.md) và anti-pattern God Aggregate ở chương [16](16-anti-patterns-va-khi-nao-khong-dung-ddd.md)). Order 5.000 dòng của khách bán sỉ? Có lẽ `Order` và `OrderLineBatch` là hai aggregate, hoặc hạn mức là một aggregate `CreditReservation` riêng cập nhật tăng dần. Sửa model, đừng sửa bằng lazy loading — lazy loading trong aggregate là thuốc giảm đau che triệu chứng của ranh giới sai.
+**Lazy vs eager load aggregate.** Nguyên tắc gốc: aggregate là *đơn vị nhất quán*, nên khi load để **thay đổi trạng thái**, load nguyên con (eager) — vì invariant cần nhìn thấy toàn bộ. `Order` kiểm tra "tổng ≤ hạn mức" mà lazy-load từng dòng hàng là vừa N+1 query vừa rủi ro invariant tính trên dữ liệu chưa load. Nếu eager load một aggregate mà *đau* (hàng nghìn dòng, hàng chục MB), thì vấn đề không nằm ở chiến lược load — **aggregate quá to, ranh giới sai** (xem chương [07](#/post/07-aggregate) và anti-pattern God Aggregate ở chương [16](#/post/16-anti-patterns-va-khi-nao-khong-dung-ddd)). Order 5.000 dòng của khách bán sỉ? Có lẽ `Order` và `OrderLineBatch` là hai aggregate, hoặc hạn mức là một aggregate `CreditReservation` riêng cập nhật tăng dần. Sửa model, đừng sửa bằng lazy loading — lazy loading trong aggregate là thuốc giảm đau che triệu chứng của ranh giới sai.
 
 **Read model cho mọi nhu cầu đọc nặng.** Aggregate tồn tại để *ghi đúng*, không phải để *đọc nhanh*. Màn hình danh sách đơn, dashboard, báo cáo — đừng load 500 aggregate rồi map sang DTO; viết query đọc thẳng (SQL/view/bảng denormalized) trả DTO, bỏ qua toàn bộ domain layer. Đây là CQRS ở mức khiêm tốn nhất — hai đường code cho ghi và đọc, chưa cần hai database, chưa cần event. Ranh giới kỷ luật duy nhất: **đường đọc tuyệt đối không được ghi**, và không chứa business rule (rule nằm ở domain; đường đọc chỉ trình bày). Khi nhu cầu đọc vượt quá khả năng của query tại chỗ (search full-text, analytics), lúc đó mới nâng cấp lên read model tách riêng cập nhật qua event — trả thêm chi phí eventual consistency một cách có ý thức.
 
@@ -720,7 +720,7 @@ Ubiquitous language mục nhanh hơn code. Người mới vào gọi `Shipment` 
 
 Toàn bộ kỹ thuật trong chương này sẽ được nhìn thấy *trong bối cảnh thật* ở chương kế: bốn case study trọn vẹn — ecommerce, fintech, banking, logistics — từ phân tích domain đến cấu trúc code và các quyết định đánh đổi cụ thể.
 
-→ [Chương 15a: Case Study — Ecommerce, Fintech, Banking, Logistics](15a-case-study-ecommerce-fintech-banking-logistics.md)
+→ [Chương 15a: Case Study — Ecommerce, Fintech, Banking, Logistics](#/post/15a-case-study-ecommerce-fintech-banking-logistics)
 
-Các chương liên quan trực tiếp: [04 — Bounded Context](04-bounded-context.md) · [05 — Context Mapping](05-context-mapping.md) · [07 — Aggregate](07-aggregate.md) · [13 — DDD và Distributed Systems](13-ddd-va-distributed-systems.md) · [16 — Anti-patterns & Khi nào không nên dùng DDD](16-anti-patterns-va-khi-nao-khong-dung-ddd.md)
+Các chương liên quan trực tiếp: [04 — Bounded Context](#/post/04-bounded-context) · [05 — Context Mapping](#/post/05-context-mapping) · [07 — Aggregate](#/post/07-aggregate) · [13 — DDD và Distributed Systems](#/post/13-ddd-va-distributed-systems) · [16 — Anti-patterns & Khi nào không nên dùng DDD](#/post/16-anti-patterns-va-khi-nao-khong-dung-ddd)
 

@@ -1,6 +1,6 @@
 # Chương 07 — Aggregate và Aggregate Root: Consistency Boundary trong thế giới concurrent
 
-> **Vị trí chương này:** Đây là chương quan trọng nhất của toàn bộ Tactical Design — nếu chỉ được đọc kỹ một chương trong nửa sau tài liệu, hãy đọc chương này. [Chương 06](06-entity-va-value-object.md) cho chúng ta Entity và Value Object — công cụ bảo vệ tính đúng đắn của *từng object riêng lẻ*. Nhưng bug đắt nhất trong production hiếm khi nằm ở một object: nó nằm ở **invariant xuyên nhiều object, bị xé rách bởi các request chạy đồng thời**. Aggregate là câu trả lời của DDD cho đúng bài toán đó. Hiểu sai Aggregate thì Repository ([chương 08](08-repository-va-factory.md)), Domain Event ([chương 10](10-domain-event.md)) và toàn bộ phần distributed systems ([chương 13](13-ddd-va-distributed-systems.md)) sẽ sai theo.
+> **Vị trí chương này:** Đây là chương quan trọng nhất của toàn bộ Tactical Design — nếu chỉ được đọc kỹ một chương trong nửa sau tài liệu, hãy đọc chương này. [Chương 06](#/post/06-entity-va-value-object) cho chúng ta Entity và Value Object — công cụ bảo vệ tính đúng đắn của *từng object riêng lẻ*. Nhưng bug đắt nhất trong production hiếm khi nằm ở một object: nó nằm ở **invariant xuyên nhiều object, bị xé rách bởi các request chạy đồng thời**. Aggregate là câu trả lời của DDD cho đúng bài toán đó. Hiểu sai Aggregate thì Repository ([chương 08](#/post/08-repository-va-factory)), Domain Event ([chương 10](#/post/10-domain-event)) và toàn bộ phần distributed systems ([chương 13](#/post/13-ddd-va-distributed-systems)) sẽ sai theo.
 
 ---
 
@@ -112,7 +112,7 @@ Một câu: **Aggregate bảo vệ lời hứa của nghiệp vụ trước sự
 - Với **persistence**: load nguyên con, save nguyên con, trong một transaction.
 - Với **concurrency**: mỗi aggregate một "hàng đợi" tuần tự (thực thi bằng optimistic version hoặc pessimistic lock); giữa các aggregate là song song và eventual consistency.
 
-Và mặt còn lại của hợp đồng, quan trọng không kém: **những gì nằm ngoài ranh giới thì aggregate *từ chối* hứa hẹn nhất quán tức thời.** Đơn hàng không hứa tên khách hàng in trên đơn luôn khớp bản ghi Customer mới nhất. Sự "từ chối" này không phải điểm yếu — nó là điều kiện để hệ thống scale. Chương [13](13-ddd-va-distributed-systems.md) xây tiếp trên chính nền này.
+Và mặt còn lại của hợp đồng, quan trọng không kém: **những gì nằm ngoài ranh giới thì aggregate *từ chối* hứa hẹn nhất quán tức thời.** Đơn hàng không hứa tên khách hàng in trên đơn luôn khớp bản ghi Customer mới nhất. Sự "từ chối" này không phải điểm yếu — nó là điều kiện để hệ thống scale. Chương [13](#/post/13-ddd-va-distributed-systems) xây tiếp trên chính nền này.
 
 ---
 
@@ -512,7 +512,7 @@ Khi dữ liệu **không có invariant đa bản ghi** và **không có ghi cạ
 
 ## Đọc tiếp
 
-Aggregate được load và save như thế nào mà không để ORM xâm thực domain — đó là việc của Repository: [Chương 08 — Repository và Factory](08-repository-va-factory.md).
+Aggregate được load và save như thế nào mà không để ORM xâm thực domain — đó là việc của Repository: [Chương 08 — Repository và Factory](#/post/08-repository-va-factory).
 
-- Quay lại: [06 — Entity và Value Object](06-entity-va-value-object.md) · [Mục lục](00-muc-luc.md)
-- Liên quan trực tiếp: [10 — Domain Event](10-domain-event.md) (event sinh từ aggregate) · [13 — DDD và Distributed Systems](13-ddd-va-distributed-systems.md) (saga, eventual consistency giữa các aggregate)
+- Quay lại: [06 — Entity và Value Object](#/post/06-entity-va-value-object) · [Mục lục](#/post/00-muc-luc)
+- Liên quan trực tiếp: [10 — Domain Event](#/post/10-domain-event) (event sinh từ aggregate) · [13 — DDD và Distributed Systems](#/post/13-ddd-va-distributed-systems) (saga, eventual consistency giữa các aggregate)

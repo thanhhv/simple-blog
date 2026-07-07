@@ -745,8 +745,8 @@ Câu chốt của chương: **Domain Service và Application Service là công c
 
 ## Đọc tiếp
 
-Suốt chương này, mỗi lần đụng đến email, SMS, cộng điểm, ta đều nói "chương 10 sẽ xử lý". Đến lúc trả nợ: Application Service đã gọi `publishAll(order.pullDomainEvents())` — cơ chế đằng sau dòng code đó, và vì sao side effect phải rời khỏi transaction, là toàn bộ nội dung của **[10-domain-event.md](./10-domain-event.md)**.
+Suốt chương này, mỗi lần đụng đến email, SMS, cộng điểm, ta đều nói "chương 10 sẽ xử lý". Đến lúc trả nợ: Application Service đã gọi `publishAll(order.pullDomainEvents())` — cơ chế đằng sau dòng code đó, và vì sao side effect phải rời khỏi transaction, là toàn bộ nội dung của **[10-domain-event.md](#/post/10-domain-event)**.
 
-- Chương trước: [08-repository-va-factory.md](./08-repository-va-factory.md)
-- Chương sau: [10-domain-event.md](./10-domain-event.md) → [11-specification.md](./11-specification.md) → [12-ddd-va-kien-truc.md](./12-ddd-va-kien-truc.md)
+- Chương trước: [08-repository-va-factory.md](#/post/08-repository-va-factory)
+- Chương sau: [10-domain-event.md](./10-domain-event.md) → [11-specification.md](#/post/11-specification) → [12-ddd-va-kien-truc.md](#/post/12-ddd-va-kien-truc)
 

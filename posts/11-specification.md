@@ -187,7 +187,7 @@ Rule một dòng, một chỗ dùng, không có dấu hiệu sẽ tổ hợp —
 
 ## Đọc tiếp
 
-Tactical Design khép lại tại đây. Phần tiếp theo trả lời câu hỏi tầm hệ thống: các mảnh này đặt vào kiến trúc nào — layer ra sao, module chia thế nào, và khi nào thành microservices: [Chương 12 — DDD và Kiến trúc](12-ddd-va-kien-truc.md).
+Tactical Design khép lại tại đây. Phần tiếp theo trả lời câu hỏi tầm hệ thống: các mảnh này đặt vào kiến trúc nào — layer ra sao, module chia thế nào, và khi nào thành microservices: [Chương 12 — DDD và Kiến trúc](1#/post/2-ddd-va-kien-truc).
 
-- Quay lại: [10 — Domain Event](10-domain-event.md) · [Mục lục](00-muc-luc.md)
-- Liên quan: [09 — Domain Service](09-domain-service-va-application-service.md) (phân biệt "hỏi" và "làm") · [08 — Repository](08-repository-va-factory.md) (vấn đề query needs)
+- Quay lại: [10 — Domain Event](#/post/10-domain-event) · [Mục lục](#/post/00-muc-luc)
+- Liên quan: [09 — Domain Service](#/post/09-domain-service-va-application-service) (phân biệt "hỏi" và "làm") · [08 — Repository](#/post/08-repository-va-factory) (vấn đề query needs)
