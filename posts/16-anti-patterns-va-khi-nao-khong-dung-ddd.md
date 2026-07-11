@@ -412,7 +412,7 @@ quadrantChart
     title Liều lượng DDD theo complexity và tuổi thọ
     x-axis Tuổi thọ ngắn --> Tuổi thọ dài
     y-axis Business đơn giản --> Business phức tạp
-    quadrant-1 Full DDD: strategic + tactical
+    quadrant-1 Full DDD strategic + tactical
     quadrant-2 Tactical chọn lọc, sẵn sàng nâng cấp
     quadrant-3 CRUD / transaction script
     quadrant-4 CRUD sạch + Ubiquitous Language

@@ -6,6 +6,9 @@
 <title>Tôi Đọc, AI Viết</title>
 <meta name="description" content="Blog kỹ thuật — chia sẻ về lập trình và công nghệ.">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<link id="hljs-theme-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<link id="hljs-theme-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
 <style>
   :root {
     --bg: #ffffff;
@@ -240,6 +243,14 @@
     margin: 1.5rem 0;
   }
   pre code { background: none; padding: 0; font-size: 0.82rem; }
+  /* Giữ nền code block theo theme của trang, chỉ lấy màu chữ từ hljs */
+  pre code.hljs { background: none; padding: 0; }
+  .mermaid-block {
+    margin: 1.5rem 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .mermaid-block svg { max-width: 100%; height: auto; }
   .back-link {
     display: inline-block;
     margin-bottom: 2rem;
@@ -305,6 +316,12 @@
     for (var i = 0; i < btns.length; i++) {
       btns[i].textContent = theme === 'dark' ? '💡' : '🌙';
     }
+    var hlLight = document.getElementById('hljs-theme-light');
+    var hlDark = document.getElementById('hljs-theme-dark');
+    if (hlLight && hlDark) {
+      hlLight.disabled = theme === 'dark';
+      hlDark.disabled = theme !== 'dark';
+    }
   }
   function currentTheme() {
     return document.documentElement.getAttribute('data-theme') || 'light';
@@ -321,6 +338,7 @@
     var next = currentTheme() === 'dark' ? 'light' : 'dark';
     localStorage.setItem('theme', next);
     applyTheme(next);
+    if (typeof renderMermaidBlocks === 'function') renderMermaidBlocks();
   });
   initTheme();
 
@@ -358,6 +376,87 @@
   }
 
   var layout = document.querySelector('.layout');
+
+  /* ---------- Syntax highlighting cho code block có khai báo ngôn ngữ ---------- */
+  if (window.hljs) {
+    hljs.registerAliases(['jsonc'], { languageName: 'json' });
+  }
+  function highlightCodeBlocks() {
+    if (!window.hljs) return;
+    // Chỉ highlight block có ```lang; block trơn (ascii art...) giữ nguyên
+    var blocks = app.querySelectorAll('article pre code[class*="language-"]');
+    Array.prototype.forEach.call(blocks, function (el) {
+      hljs.highlightElement(el);
+    });
+  }
+
+  /* ---------- Mermaid: block ```mermaid → diagram ---------- */
+  // Code block ngôn ngữ "mermaid" render thành placeholder, giữ nguồn trong data-src.
+  // Các block khác (ascii, code thường) trả false → marked render mặc định.
+  marked.use({
+    renderer: {
+      code: function (code, infostring) {
+        var lang = (infostring || '').trim().toLowerCase();
+        if (lang === 'mermaid') {
+          return '<div class="mermaid-block" data-src="' + esc(code) + '"></div>';
+        }
+        return false;
+      }
+    }
+  });
+
+  // Chỉ tải thư viện mermaid khi bài viết thực sự có diagram
+  var mermaidLoader = null;
+  function loadMermaid() {
+    if (window.mermaid) return Promise.resolve(window.mermaid);
+    if (!mermaidLoader) {
+      mermaidLoader = new Promise(function (resolve, reject) {
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+        s.onload = function () { resolve(window.mermaid); };
+        s.onerror = function () {
+          mermaidLoader = null; // lỗi mạng thì cho phép thử lại
+          reject(new Error('Không tải được mermaid'));
+        };
+        document.head.appendChild(s);
+      });
+    }
+    return mermaidLoader;
+  }
+
+  function mermaidFallback(el, src) {
+    // Không render được thì hiển thị lại dạng code block như cũ
+    var pre = document.createElement('pre');
+    var code = document.createElement('code');
+    code.textContent = src;
+    pre.appendChild(code);
+    el.innerHTML = '';
+    el.appendChild(pre);
+  }
+
+  var mermaidSeq = 0;
+  function renderMermaidBlocks() {
+    var blocks = app.querySelectorAll('.mermaid-block');
+    if (!blocks.length) return;
+    loadMermaid().then(function (mermaid) {
+      mermaid.initialize({
+        startOnLoad: false,
+        suppressErrorRendering: true,
+        theme: currentTheme() === 'dark' ? 'dark' : 'default'
+      });
+      Array.prototype.forEach.call(blocks, function (el) {
+        var src = el.getAttribute('data-src');
+        if (!src) return;
+        mermaid.render('mermaid-svg-' + (++mermaidSeq), src)
+          .then(function (res) { el.innerHTML = res.svg; })
+          .catch(function () { mermaidFallback(el, src); });
+      });
+    }).catch(function () {
+      Array.prototype.forEach.call(blocks, function (el) {
+        mermaidFallback(el, el.getAttribute('data-src') || '');
+      });
+    });
+  }
 
   /* ---------- Trang chủ: danh sách nhiều cột ---------- */
   function renderList(filterTag) {
@@ -439,6 +538,8 @@
             '</article></div>';
           document.title = post.title + ' · Gavin';
           window.scrollTo(0, 0);
+          highlightCodeBlocks();
+          renderMermaidBlocks();
         });
     }).catch(showError);
   }
